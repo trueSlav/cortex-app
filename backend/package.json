@@ -13,7 +13,9 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.2",
-    "mysql": "^2.18.1",
-    "nodemon": "^3.1.7"
+    "mysql2": "^3.11.5",
+    "nodemon": "^3.1.7",
+    "openai": "^4.76.3",
+    "typescript": "^5.7.2"
   }
 }

@@ -1,0 +1,12 @@
+.sidebar {
+  position: relative;
+  justify-self: end;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-inline-end: 20%;
+  border-inline-end: 1px solid var(--gray-light);
+
+
+}

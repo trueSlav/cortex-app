@@ -1,0 +1,43 @@
+.button {
+  --text-color: var(--btn-text-color);
+  --background-color: var(--btn-background-color);
+
+  display: flex;
+  place-items: center;
+  gap: 10px;
+  outline: none;
+  padding: 10px;
+  padding-inline: 2.5%;
+  border-radius: 10px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  transition: .2s color ease-in-out;
+
+  a {
+    text-decoration: none;
+  }
+
+  & > p::first-letter, a::first-letter, span::first-letter{
+    text-transform: uppercase;
+  }
+
+  &:hover {
+    --text-color: var(--accent-color);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: var(--white-normal);
+  }
+
+  &:not(.active):hover {
+    --text-color: var(--accent-color);
+  }
+}
+
+.active {
+  --background-color: var(--accent-color);
+}

@@ -1,0 +1,23 @@
+.list {
+  margin-block-end: 20px;
+
+  ul {
+    margin-block-end: 20px;
+    background-color: var(--gray-light);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-inline: 20px;
+    padding-block: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .buttonBlock {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+}

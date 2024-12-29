@@ -1,0 +1,45 @@
+.input {
+  --color-text: var(--input-text-color);
+  --border-color: var(--input-border-color);
+
+  color: var(--input-text-color);
+  background: initial;
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-color);
+  padding: 2.5px 14px 2.5px 5px;
+  appearance: none;
+  outline: none;
+
+  &:active {
+    outline: 1px solid var(--white-normal);
+  }
+
+  &:hover {
+    cursor: text;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--white-normal);
+  }
+}
+
+.label {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  & span:first-letter{
+    color: var(--accent-color);
+    text-transform: uppercase;
+  }
+  p {
+    color: tomato;
+  }
+}
+

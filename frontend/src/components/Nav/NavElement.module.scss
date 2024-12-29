@@ -1,0 +1,36 @@
+.navElement {
+
+  background-color: var(--gray-light);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+
+
+  .link {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+
+    .innerWrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      span {
+        padding-block-start: 5px;
+      }
+
+    }
+
+    &:not(.active):hover {
+      color: var(--accent-color);
+    }
+  }
+
+    .active {
+      background-color: var(--accent-color);
+    }
+
+}

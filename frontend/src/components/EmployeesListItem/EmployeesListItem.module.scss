@@ -1,0 +1,25 @@
+.article {
+  padding-block-end: 6px;
+  line-height: 1.4;
+  display: flex;
+  justify-content: space-between;
+  place-items: center;
+  border-block-end: 2px solid var(--gray-dark);
+
+  span {
+    color: var(--accent-color);
+  }
+
+  .buttonBlock {
+    display: flex;
+    gap: 20px;
+
+    .icon {
+      transition: .3s transform;
+      outline: none;
+    }
+    .icon:hover {
+      transform: translateY(-5px);
+    }
+  }
+}

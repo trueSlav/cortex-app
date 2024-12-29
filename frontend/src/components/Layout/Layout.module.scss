@@ -1,0 +1,44 @@
+.page {
+  --color-text: var(--white, #fefefe);
+  --color-background: var(--gray-dark, #191919);
+
+  font: 400 16px / 1 var(--font-main, 'Nunito', sans-serif);
+  color: var(--color-text, #302f2c);
+  background-color: var(--color-background);
+  min-inline-size: 320px;
+  min-block-size: 100dvb;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: min(100vh);
+  place-items: center;
+  padding-inline: 6%;
+
+  .main {
+    padding-inline-start: 6%;
+    position: relative;
+    height: 50%;
+    inline-size: 100%;
+  }
+}
+
+@media (width < 750px) {
+  .page {
+    padding-inline: 6%;
+    padding-block: 8%;
+    display: flex;
+    flex-direction: column;
+
+    aside {
+      margin-block-end: 10%;
+      //padding-inline-end: 0;
+      //padding-inline: 8%;
+    }
+
+    aside > nav ul {
+      display: flex;
+      flex-direction: row;
+      padding-block-start: 40px;
+      flex-wrap: wrap;
+    }
+  }
+}

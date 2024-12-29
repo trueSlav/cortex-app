@@ -1,0 +1,20 @@
+//main - dark theme
+:root {
+  --font-main: 'Nunito', sans-serif;
+  --yellow-gold: #fccc42;
+  --lavande: #be94f5;
+  --lime: #00cc14;
+  --gray-dark: #191919;
+  --gray-light: #252525;
+  --white-normal: #fefefe;
+  --white-gray: rgb(255 255 255 / 0.7);
+
+  --accent-color: var(--lavande);
+
+  --btn-text-color: var(--white-normal);
+  --btn-background-color: var(--gray-light);
+
+  --input-text-color: var(--white-gray);
+  --input-border-color: var(--white-normal);
+
+}

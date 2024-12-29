@@ -1,10 +1,11 @@
 import axios from 'axios'
 import { PagesUrl } from '../constants/pageUrl'
+import {IDataDepartment, IUser} from "../types/types.ts";
 
-const checkMethod = (method: string, url: string, data: any) => {
+const checkMethod = (method: string, url: string, data?: object) => {
 	switch (method) {
 		case 'get':
-			return axios.get(`${PagesUrl.BASE_URL}${url}`, data)
+			return axios.get<IUser | IDataDepartment>(`${PagesUrl.BASE_URL}${url}`, data)
 		case 'post':
 			return axios.post(`${PagesUrl.BASE_URL}${url}`, data)
 		case 'put':

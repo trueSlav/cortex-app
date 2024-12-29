@@ -1,0 +1,36 @@
+services:
+  my-database:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: employee_db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: 553969mysql
+    ports:
+      - "3306:3306"
+
+  backend:
+    build:
+      context: ./backend/
+    depends_on:
+      - my-database
+    command: bash -c 'while !</dev/tcp/my-database/3306; do sleep 1; done; npm start'
+    ports:
+      - "3011:3011"
+    develop:
+      watch:
+        - path: ./app/backend/package.json
+          action: rebuild
+        - path: ./backend/index.js
+          target: /usr/src/app/index.js
+          action: sync+restart
+
+  frontend:
+    build:
+      context: ./frontend/
+    depends_on:
+      - my-database
+      - backend
+    ports:
+      - "5173:5173"

@@ -1,103 +1,18 @@
-import express from 'express';
-import cors from 'cors';
-import mysql from "mysql2";
-import { OpenAI } from 'openai'
+const express = require('express')
+const cors = require('cors')
+const mysql = require("mysql2");
+const OpenAI = require('openai');
+require('dotenv').config()
 
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 const app = express();
-app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
 
-const db = mysql.createConnection({
-    host: 'my-database',
-    user: 'db_user',
-    password: process.env.DB_PASSWORD,
-    // host: 'localhost',
-    // user: 'root',
-    database: 'employee_db',
-    multipleStatements: true
-})
-
-const checkTables = (callback) => {
-    const check =
-      `
-        SELECT EXISTS(SELECT 1 FROM information_schema.tables WHERE table_schema = 'employee_db' AND table_name = 'users') AS users; 
-        SELECT EXISTS(SELECT 1 FROM information_schema.tables WHERE table_schema = 'employee_db' AND table_name = 'departments') AS departments; 
-    `;
-
-    db.query(check, (error, result) => {
-        const [users, departments] = result;
-        const tablesExist = {
-            users: users[0].users === 1,
-            departments: departments[0].departments === 1
-        }
-        return callback(tablesExist);
-    })
-}
-
-const createDBTables = (checkTable) => {
-    const createTableUsers = `create table if not exists users(
-      id int primary key auto_increment,
-      first_name varchar(255) not null,
-      last_name varchar(255) not null,
-      middle_name varchar(255) not null,
-      position varchar(255) not null,
-      hire_date date
-    )`;
-    const createTableDepartments = `create table if not exists departments(
-      id int primary key auto_increment,
-      dep_name varchar(255) not null,
-      dep_descr varchar(255) not null
-    )`;
-
-    checkTable(function (tables) {
-        if(!tables.users) {
-            db.query(createTableUsers, (error, result) => {
-                if (!error) {
-                    console.log("Table users created successfully.");
-                } else {
-                    console.log(error.sql)
-                    console.log('Error create table users', error.message)
-                }
-            })
-        }
-
-        if(!tables.departments) {
-            db.query(createTableDepartments, (error, result) => {
-                if (!error) {
-                    console.log("Table departments created successfully.");
-
-                } else {
-                    console.log(error.sql)
-                    console.log('Error create table departments', error.message)
-                }
-            })
-        }
-    })
-}
-createDBTables(checkTables)
-
-app.post('/users', (req, res) => {
-    const sql = "INSERT INTO users (`first_name`,`last_name`,`middle_name`, `position`, `hire_date`) VALUES (?)"
-    const values = [
-        req.body.firstName,
-        req.body.lastName,
-        req.body.middleName,
-        req.body.position,
-        req.body.hireDate,
-    ]
-    db.query(sql, [values], (err, result) => {
-        if (err) {
-            return console.log(`Error to inserting data`, err);
-        } else {
-            console.log('Successfully inserted data');
-            const updatedUsers = 'SELECT * FROM users'
-            db.query(updatedUsers, (error, newList) => {
-                res.send(newList);
-            })
-        }
-    })
-})
+const createUser = require('./routes/users');
+// /api/users/create
+app.use('/api/users/', createUser);
 
 app.get('/users/edit/:id', (req, res) => {
     try {
@@ -297,7 +212,7 @@ app.post('/letter', (req, res) => {
     }
 })
 
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${process.env.PORT}`);
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 })
 

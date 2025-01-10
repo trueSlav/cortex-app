@@ -1,18 +1,18 @@
 const express = require('express')
 const cors = require('cors')
-const mysql = require("mysql2");
+// const mysql = require("mysql2");
 const OpenAI = require('openai');
+
 require('dotenv').config()
 
 const PORT = process.env.PORT || 3000;
 const app = express();
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-const createUser = require('./routes/users');
-// /api/users/create
-app.use('/api/users/', createUser);
+app.use('/api/employees/', require('./routes/employees'));
 
 app.get('/users/edit/:id', (req, res) => {
     try {

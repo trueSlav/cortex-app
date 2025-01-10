@@ -44,7 +44,7 @@ const EmployeesAddForm = ({setUsers}) => {
 	}
 
 	const onSubmit:SubmitHandler<IFormInput> = async (data) => {
-		const response = await apiFetch('post', '/users', data)
+		const response = await apiFetch('post', '/api/user/create', data)
 		setUsers(response)
 	}
 
@@ -55,7 +55,8 @@ const EmployeesAddForm = ({setUsers}) => {
 		>
 
 			<Controller
-				name='firstName'
+				// name='firstName'
+				name='name'
 				control={control}
 				rules={{
 					required: 'is required',
@@ -77,7 +78,8 @@ const EmployeesAddForm = ({setUsers}) => {
 			/>
 
 			<Controller
-				name='lastName'
+				// name='lastName'
+				name='surname'
 				control={control}
 				rules={{
 					required: 'is required',
@@ -99,7 +101,8 @@ const EmployeesAddForm = ({setUsers}) => {
 			/>
 
 			<Controller
-				name='middleName'
+				// name='middleName'
+				name='patronymic'
 				control={control}
 				rules={{
 					maxLength: 20,
@@ -119,7 +122,8 @@ const EmployeesAddForm = ({setUsers}) => {
 			/>
 
 			<Controller
-				name='hireDate'
+				// name='hireDate'
+				name='hire_date'
 				control={control}
 				rules={{
 					valueAsDate: true,
@@ -135,8 +139,9 @@ const EmployeesAddForm = ({setUsers}) => {
 				)}
 			/>
 
+				{/*{...register('position')}*/}
 			<select
-				{...register('position')}
+				{...register('department')}
 				className={styles.select}
 				style={{ color: '#ffcc14' }}
 			>

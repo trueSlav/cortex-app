@@ -8,6 +8,7 @@ interface IResponse {
 const apiFetch = async (method:string, url:string, data?:object):Promise<IResponse> => {
 	try {
 		const response = await checkMethod(method, url, data)
+		console.log(response)
 		if (response?.status === 200 && response?.statusText === 'OK') {
 			return response?.data
 		}

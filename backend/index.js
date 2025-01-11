@@ -1,6 +1,5 @@
 const express = require('express')
 const cors = require('cors')
-// const mysql = require("mysql2");
 const OpenAI = require('openai');
 
 require('dotenv').config()
@@ -14,86 +13,13 @@ app.use(cors());
 
 app.use('/api/employees/', require('./routes/employees'));
 
-app.get('/users/edit/:id', (req, res) => {
-    try {
-        const _id = req.params.id;
-        const sql = `SELECT * FROM users WHERE id = ${_id}`
-        db.query(sql, (err, result) => {
-            if (!err) {
-                res.send(result);
-            } else {
-                console.log('failed user editing', err.message)
-            }
-        })
-    } catch (error) {
-        return res.status(500).json({success: false ,error: 'edit department error on server'});
-    }
-})
-
-app.put('/users/edit/:id', (req, res) => {
-    try {
-        const _id = req.params.id;
-        const sql = `UPDATE users SET first_name = (?), last_name = (?), middle_name = (?), position = (?), hire_date = (?) WHERE id = ${_id}`;
-        const values = [
-            req.body.first_name,
-            req.body.last_name,
-            req.body.middle_name,
-            req.body.position,
-            req.body.hire_date,
-        ]
-
-        db.query(sql, [...values], (err, result) => {
-            if (!err) {
-                res.send(result);
-            } else {
-                console.log(err.sql)
-                console.log('the update users on the database side failed!', err.message)
-            }
-        })
-    } catch (error) {
-        console.log(error.message);
-    }
-})
-
-app.delete('/users/:id', (req, res) => {
-    try {
-        const _id = req.params.id;
-        const sql = `DELETE FROM users WHERE id = ${_id}`;
-
-        db.query(sql, (err, result) => {
-            if (!err) {
-                res.send(result);
-            } else {
-                console.log(err.sql)
-                console.log('the delete user on the database side failed!', err.message)
-            }
-        })
-    } catch (error) {
-        console.log(error.message)
-    }
-})
-
-app.get('/get-users', (req, res) => {
-    const sql = "SELECT * FROM users";
-    db.query(sql, (err, result) => {
-        if (!err) {
-            console.log('Successfully read users');
-            res.send(result);
-        } else {
-            console.log('failed to read users');
-        }
-    })
-})
-
 app.post('/departments', (req, res) => {
-
     try {
         const sql = "INSERT INTO departments (`dep_name`, `dep_descr`) VALUES (?)"
         const values = [
             req.body.dep_name,
             req.body.dep_descr,
         ]
-
         db.query(sql, [values], (err, result) => {
             if (err) {
                 console.log(result)
@@ -106,7 +32,6 @@ app.post('/departments', (req, res) => {
                 return console.log('Successfully inserted data to departments table');
             }
         })
-
     } catch (error) {
         return res.status(500).json({success: false ,error: 'add position error on server'});
     }
@@ -190,7 +115,6 @@ app.post('/letter', (req, res) => {
             apiKey: apikey,
 
         })
-
         async function main() {
             const completion = await openai.chat.completions.create({
                 model: "meta-llama/llama-3.1-70b-instruct:free",

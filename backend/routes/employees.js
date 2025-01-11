@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const {all, single, add, remove, edit} = require('../controllers/employees')
 
-router.get('/', () => {console.log('get all employees')})
-router.get('/:id', () => {console.log('get an employee by id')})
-router.post('/add', () => {console.log('add employee')})
-router.delete('/remove/:id', () => {console.log('remove an employee by id')})
-router.put('/edit/:id', () => {console.log('edit an employee by id')})
+router.get('/', all)
+router.get('/:id', single)
+router.post('/add', add)
+router.delete('/remove/:id', remove)
+router.put('/edit/:id', edit)
 
 module.exports = router;
